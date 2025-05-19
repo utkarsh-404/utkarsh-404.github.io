@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utkarsh Raj | CyberSec Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://www.svgrepo.com/show/353853/hacker.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root { 
+      --neon-green: #00ff88; 
+      --cyber-blue: #00f3ff; 
+      --dark-bg: #0a0a0f; 
+      --terminal-bg: rgba(0,20,16,0.95); 
+      --text-primary: #e0e0e0; 
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Space Mono', monospace;
+    }
+
+    body {
+      background: var(--dark-bg);
+      color: var(--text-primary);
+      overflow-x: hidden;
+    }
+
+    .matrix-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.1;
+    }
+
+    .cyber-nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--neon-green);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1rem;
+    }
+
+    .logo {
+      color: var(--neon-green);
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      color: var(--text-primary);
+      text-decoration: none;
+      padding: 0.5rem;
+      transition: 0.3s;
+    }
+
+    .nav-link:hover {
+      text-shadow: 0 0 10px var(--neon-green);
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      color: var(--text-primary);
+      cursor: pointer;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 160px 2rem 80px;
+    }
+
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 2px solid var(--neon-green);
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+
+    .terminal-prompt {
+      color: var(--neon-green);
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .typing-effect {
+      color: var(--cyber-blue);
+      border-right: 2px solid var(--neon-green);
+      animation: blink 1s step-end infinite;
+    }
+
+    .cyber-button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      background: linear-gradient(135deg, var(--neon-green), var(--cyber-blue));
+      color: #000;
+      text-decoration: none;
+      border-radius: 6px;
+      box-shadow: 0 0 10px var(--neon-green);
+      transition: transform 0.2s;
+    }
+
+    .cyber-button:hover {
+      transform: scale(1.05);
+    }
+
+    @keyframes blink {
+      0%, 100% { border-color: transparent; }
+      50% { border-color: var(--neon-green); }
+    }
+
+    section {
+      padding: 3rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      color: var(--neon-green);
+      border-left: 4px solid var(--neon-green);
+      padding-left: 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .skill-container {
+      margin-bottom: 1.5rem;
+    }
+
+    .skill-container h3 {
+      color: var(--cyber-blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .skill-bar {
+      background: rgba(0,255,136,0.1);
+      height: 12px;
+      border-radius: 6px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .skill-progress {
+      height: 100%;
+      background: linear-gradient(90deg, var(--neon-green), var(--cyber-blue));
+      width: 0;
+      animation: fillBar 1.5s forwards;
+      transition: transform 0.3s ease;
+    }
+
+    .skill-bar:hover .skill-progress {
+      transform: scaleY(1.2);
+      box-shadow: 0 0 15px var(--neon-green);
+    }
+
+    @keyframes fillBar {
+      to { width: var(--level); }
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: var(--terminal-bg);
+      padding: 1.5rem;
+      border: 1px solid rgba(0,255,136,0.1);
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .project-card:hover {
+      border-color: var(--neon-green);
+      transform: translateY(-5px);
+    }
+
+    .project-card h3 {
+      color: var(--neon-green);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-card p {
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .project-buttons a {
+      display: inline-block;
+      margin-right: 1rem;
+      padding: 0.4rem 0.8rem;
+      background: var(--neon-green);
+      color: #000;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+
+    .project-buttons a.github {
+      background: var(--cyber-blue);
+    }
+
+    .project-buttons a:hover {
+      opacity: 0.8;
+    }
+
+    .terminal {
+      background: var(--terminal-bg);
+      padding: 1rem;
+      border-left: 4px solid var(--neon-green);
+      color: var(--neon-green);
+      white-space: pre-line;
+      margin-bottom: 1rem;
+      border-radius: 4px;
+    }
+
+    .contact-form {
+      background: var(--terminal-bg);
+      padding: 2rem;
+      border-left: 4px solid var(--neon-green);
+      border-radius: 4px;
+    }
+
+    .contact-form label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--neon-green);
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      background: #111;
+      border: 1px solid var(--neon-green);
+      color: var(--text-primary);
+    }
+
+    .contact-form button {
+      padding: 0.6rem 1.2rem;
+      background: var(--neon-green);
+      border: none;
+      color: #000;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .contact-form button:hover {
+      opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+      .nav-links {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background: var(--dark-bg);
+        display: none;
+      }
+      .nav-links.show {
+        display: flex;
+      }
+    }
+
+    .read-more-btn {
+      background: var(--cyber-blue);
+      color: #000;
+      border: none;
+      border-radius: 4px;
+      padding: 0.4rem 0.8rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .read-more-btn:hover {
+      background: var(--neon-green);
+      transform: scale(1.05);
+    }
+
+    .more-info {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.4s ease, opacity 0.4s ease;
+      opacity: 0;
+    }
+
+    .more-info.open {
+      max-height: 300px;
+      opacity: 1;
+      margin-top: 0.5rem;
+    }
+
+    /* Added See More Button */
+    .see-more-projects {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .see-more-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: linear-gradient(135deg, var(--neon-green), var(--cyber-blue));
+      color: #000;
+      text-decoration: none;
+      border-radius: 6px;
+      box-shadow: 0 0 10px var(--neon-green);
+      transition: transform 0.2s;
+    }
+
+    .see-more-button:hover {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <canvas class="matrix-bg"></canvas>
+  
+  <nav class="cyber-nav">
+    <div class="logo">Utkarsh Raj</div>
+    <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#whoami" class="nav-link">$ whoami</a></li>
+      <li><a href="#skills" class="nav-link">$ skills</a></li>
+      <li><a href="#projects" class="nav-link">$ projects</a></li>
+      <li><a href="#experience" class="nav-link">$ experience</a></li>
+      <li><a href="#education" class="nav-link">$ education</a></li>
+      <li><a href="#contact" class="nav-link">$ contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Whoami Section -->
+  <section class="hero" id="whoami">
+    <div class="terminal-prompt">root@kali:~# whoami</div>
+    <img src="asset/photo.jpg" alt="Profile" class="profile-pic">
+    <h1 class="typing-effect">Utkarsh Raj</h1>
+    <div class="terminal-prompt" id="dynamic-role"></div>
+    <p style="margin-top:1.5rem; max-width:600px; margin-left:auto; margin-right:auto;">I'm a highly motivated and passionate cybersecurity enthusiast currently pursuing B.Tech in Cyber Security. I've completed several cybersecurity-related courses and internships and love exploring new vulnerabilities and digital defense tactics.</p>
+    <a href="asset/Resume.pdf" class="cyber-button" download>Download CV</a>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <h2 class="section-title">Skills</h2>
+    <div class="skill-container" style="--level:90%;">
+      <h3>Linux</h3>
+      <div class="skill-bar">
+        <div class="skill-progress"></div>
+      </div>
+    </div>
+    <div class="skill-container" style="--level:85%;">
+      <h3>VAPT & Web Security</h3>
+      <div class="skill-bar">
+        <div class="skill-progress"></div>
+      </div>
+    </div>
+    <div class="skill-container" style="--level:80%;">
+      <h3>Programming (Python, Java, C/C++) </h3>
+      <div class="skill-bar">
+        <div class="skill-progress"></div>
+      </div>
+    </div>
+    <div class="skill-container" style="--level:80%;">
+      <h3>DBMS</h3>
+      <div class="skill-bar">
+        <div class="skill-progress"></div>
+      </div>
+    </div>
+    <div class="skill-container" style="--level:85%;">
+      <h3>Web Technologies (HTML, CSS, Javascript)</h3>
+      <div class="skill-bar">
+        <div class="skill-progress"></div>
+      </div>
+    </div>
+    <div class="skill-container" style="--level:45%;">
+      <h3>API & Cloud Security</h3>
+      <div class="skill-bar">
+        <div class="skill-progress"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <h2 class="section-title">Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>StegTool</h3>
+        <p>A comprehensive command-line interface for image steganography operations. Hide and extract secret messages using various steganographic techniques with modular tool support.</p>
+        <div class="project-buttons">
+          <button class="read-more-btn">Read More</button>
+          <a href="https://github.com/utkarsh-404/stegtool" class="github">GitHub</a>
+        </div>
+        <div class="more-info">
+          <p>> This tool offers multiple steganography methods including image-based steganography, password-protected secrets, and hidden data detection. It supports tools like steghide for robust encryption-based hiding, zsteg for advanced LSB analysis, and exiftool for metadata manipulation. Core operations include encoding messages or files into images, decoding hidden content, and detecting potential steganographic data. It’s fully cross-platform and works on Linux, macOS, and Windows (via WSL).
+</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <h3>SubEnum</h3>
+        <p>A Bash script to automate subdomain enumeration, live target detection, and reconnaissance using popular tools like subfinder, sublist3r, knockpy, httprobe, and eyewitness.</p>
+        <div class="project-buttons">
+          <button class="read-more-btn">Read More</button>
+          <a href="https://github.com/utkarsh-404/subenum" class="github">GitHub</a>
+        </div>
+        <div class="more-info">
+          <p>This tool offers a streamlined workflow for reconnaissance and subdomain enumeration. It uses 8+ tools to gather subdomains, providing comprehensive coverage across multiple sources. For live target detection, it filters active HTTP/HTTPS services using `httprobe`. The reconnaissance phase includes capturing screenshots of live targets with `eyewitness` and identifying technologies in use through `whatweb`. All of this is automated with a single command, making the process efficient and easy to use.
+</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <h3>Web Application Firewall</h3>
+        <p>A practical demonstration of a Web Application Firewall protecting against common web vulnerabilities like SQL Injection, Command Injection, and XSS attacks.</p>
+        <div class="project-buttons">
+          <button class="read-more-btn">Read More</button>
+          <a href="https://github.com/utkarsh-404/WAF" class="github">GitHub</a>
+        </div>
+        <div class="more-info">
+          <p>This tool features real-time request filtering to help safeguard web applications from common attack vectors. It offers protection against SQL Injection, Command Injection, Cross-Site Scripting (XSS), and Path Traversal. To demonstrate its capabilities, it includes interactive demo forms backed by a secure implementation on the backend. Additionally, a responsive search bar showcases how filtering works in a realistic scenario.
+</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- See More on GitHub Button -->
+    <div class="see-more-projects">
+      <a href="https://github.com/utkarsh-404" target="_blank" class="see-more-button">
+        <i class="fab fa-github"></i>
+        See More on GitHub
+      </a>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience">
+    <h2 class="section-title">Experience & Internships</h2>
+    <div class="terminal">&gt; Gurugram Cyber Police – Internship 2024
+Learned Bug Hunting, OSINT, Threat Intelligence, participated in CTF.</div>
+    <div class="terminal">&gt; Hacktify – Penetration Testing Internship
+Learned Web App Security, VulnerABILITIES, participated in CTF.</div>
+    <div class="terminal">&gt; Spin The Hack – Red Teaming Case Study
+Red Team operations simulation after training.</div>
+    <div class="terminal">&gt; Palo Alto (AICTE) – Virtual Internship
+Network Security, Cloud Security, SOC Fundamentals.</div>
+  </section>
+
+  <!-- Education Section -->
+  <section id="education">
+    <h2 class="section-title">Education</h2>
+    <div class="terminal">&gt; B.Tech in CSE (CyberSecurity) - Galgotias University, Uttar Pradesh<br> – 2022–Present</div>
+    <div class="terminal">&gt; 12th Standard – Gaya College, Bihar <br>BSEB, 2022</div>
+    <div class="terminal">&gt; 10th Standard – G.D. Goenka Public School, Bihar <br>CBSE, 2020</div>
+  </section>
+
+  <!-- Contact Section -->
+  <!-- Update the Contact Section -->
+<!-- Updated Contact Section -->
+<section id="contact">
+  <h2 class="section-title">Contact</h2>
+  <form class="contact-form" action="https://formspree.io/f/meogdkjz" method="POST">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" placeholder="Your Name" required>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" placeholder="Your Email" required>
+
+    <label for="message">Message</label>
+    <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+
+    <button type="submit">Send</button>
+
+    <div class="contact-info" style="margin-top:2rem; color:var(--text-primary);">
+      <div class="social-icons" style="display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 1rem;">
+        <a href="mailto:sinha.utkarsh222@gmail.com" style="color:var(--neon-green);"><i class="fas fa-envelope fa-2x"></i></a>
+        <a href="https://www.linkedin.com/in/utkarsh-raj-492187209" target="_blank" style="color:var(--neon-green);"><i class="fab fa-linkedin fa-2x"></i></a>
+        <a href="https://github.com/utkarsh-404" target="_blank" style="color:var(--neon-green);"><i class="fab fa-github fa-2x"></i></a>
+        <a href="https://instagram.com/_utkarsh_404_" target="_blank" style="color:var(--neon-green);"><i class="fab fa-instagram fa-2x"></i></a>
+        <a href="https://x.com/utkarsh404" target="_blank" style="color:var(--neon-green);"><i class="fab fa-twitter fa-2x"></i></a>
+        <a href="https://ultrahacktalks.blogspot.com" target="_blank" style="color:var(--neon-green);"><i class="fas fa-blog fa-2x"></i></a>
+      </div>
+
+      <div style="text-align: center;">
+        <p style="margin: 0.5rem 0;">
+          <i class="fas fa-map-marker-alt" style="margin-right: 0.5rem;"></i>
+          Delhi NCR, India
+        </p>
+      </div>
+    </div>
+  </form>
+</section>
+
+
+  <script>
+    const canvas = document.querySelector('.matrix-bg');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+    const fontSize = 14;
+    const columns = canvas.width/fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(0,20,0,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#0F0';
+      ctx.font = fontSize + 'px monospace';
+      
+      drops.forEach((d, i) => {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(text, i*fontSize, d*fontSize);
+        if(d*fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawMatrix, 50);
+
+    const roles = ['Penetration Tester','Security Analyst','Red Team Member','Community Builder'];
+    const roleEl = document.getElementById('dynamic-role');
+    let idx = 0;
+    
+    setInterval(() => {
+      roleEl.style.opacity = 0;
+      setTimeout(() => {
+        roleEl.textContent = roles[idx];
+        roleEl.style.opacity = 1;
+        idx = (idx + 1) % roles.length;
+      }, 500);
+    }, 2000);
+
+    document.querySelectorAll('.skill-progress').forEach(el => {
+      const lvl = getComputedStyle(el.parentElement.parentElement).getPropertyValue('--level');
+      el.style.width = lvl;
+    });
+
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => navLinks.classList.toggle('show'));
+
+    // Read More Functionality
+    document.querySelectorAll('.read-more-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const moreInfo = btn.closest('.project-card').querySelector('.more-info');
+        const isOpen = moreInfo.classList.contains('open');
+        
+        moreInfo.classList.toggle('open');
+        btn.textContent = isOpen ? 'Read More' : 'Show Less';
+        
+        if (!isOpen) {
+          moreInfo.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+    });
+
+    // Skill Bar Hover Effects
+    document.querySelectorAll('.skill-bar').forEach(bar => {
+      bar.addEventListener('mouseenter', () => {
+        bar.style.transform = 'scale(1.02)';
+        bar.style.boxShadow = '0 0 15px var(--neon-green)';
+      });
+      
+      bar.addEventListener('mouseleave', () => {
+        bar.style.transform = 'scale(1)';
+        bar.style.boxShadow = 'none';
+      });
+    });
+  </script>
+</body>
+</html>
