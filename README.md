@@ -2,7 +2,7 @@
 
 Welcome to my personal cybersecurity-themed portfolio site, built to showcase my skills, projects, experience, and certifications as a cybersecurity enthusiast and ethical hacker.
 
-> 🔗 Live: [https://[https://utkarsh-404.github.io/](https://utkarsh-404.github.io/)
+> 🔗 Live: [https://utkarsh-404.github.io/](https://utkarsh-404.github.io/)
 
 ---
 
